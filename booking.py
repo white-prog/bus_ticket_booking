@@ -4,13 +4,16 @@ class Tickets:
         self.bus_Name = bus_Name
         self.tickets = []
     def book_seat(self,name,age,number_of_seats):
-        if self.seats_available >= number_of_seats:
-            tkt_id = len(self.tickets)
-            self.tickets.append([tkt_id,name,age,number_of_seats])
-            print(f"{name} ticket is available, ticket id is {tkt_id}")
-            self.seats_available -= number_of_seats
+        if age >= 18:
+            if self.seats_available >= number_of_seats:
+                tkt_id = len(self.tickets)
+                self.tickets.append([tkt_id,name,age,number_of_seats])
+                print(f"{name} ticket is available, ticket id is {tkt_id}")
+                self.seats_available -= number_of_seats
+            else:
+                print(f"{name} ticket not found")
         else:
-            print(f"{name} ticket not found")
+            print(f"{name} you are not eligible")
     def show_ticket(self,id):
         low = 0 
         high = len(self.tickets) - 1
@@ -26,4 +29,6 @@ class Tickets:
     def delete_ticket(self,id):
         self.seats_available += self.tickets[id - 1][3]
         self.tickets.remove(self.tickets[id  - 1])
+    def get_busName(self):
+        return self.bus_Name
 
